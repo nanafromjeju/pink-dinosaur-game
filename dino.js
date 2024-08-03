@@ -64,6 +64,8 @@ window.onload = function () {
   setInterval(placeCactus, 1000);
   document.addEventListener("keydown", moveDino);
   document.getElementById("reset-button").addEventListener("click", resetGame);
+
+  board.addEventListener("click", handleMobileClick);
 };
 
 function update() {
@@ -167,20 +169,13 @@ function detectCollision(a, b) {
   );
 }
 
-function handleMouseClick(e) {
+function handleMobileClick(e) {
   if (gameOver) {
-    let rect = board.getBoundingClientRect();
-    let x = e.clientX - rect.left;
-    let y = e.clientY - rect.top;
+    return;
+  }
 
-    if (
-      x >= boardWidth / 2 - 50 &&
-      x <= boardWidth / 2 + 50 &&
-      y >= boardHeight / 2 &&
-      y <= boardHeight / 2 + 50
-    ) {
-      resetGame();
-    }
+  if (dino.y === dinoY) {
+    velocityY = -10;
   }
 }
 
